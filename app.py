@@ -120,7 +120,7 @@ def funcao_filtrar_e_excluir(local_arquivo, data_modificacao):
             print(f'\nArquivos modificados há mais de {data_modificacao} dias e com 40 caracteres: '
                   f'{len(pastas_para_remover)} pastas.\n\n')
 
-            # Solicita confirmação do usuário antes de excluir as pastas
+            # Solicita confirmação do utilizador antes de excluir as pastas
             print('Deseja realmente apagar as respectivas pastas?')
             opcao_usuario = input('COMANDO [Y]Sim [N]Não: ')
 

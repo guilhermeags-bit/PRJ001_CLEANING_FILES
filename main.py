@@ -46,7 +46,7 @@ def iniciar_programa():
     print('==============================================================\n')
 
     while main:
-        print(f'Data de exclusão: {data_modificacao}\n')
+        print(f'Data de exclusão: {data_modificacao} dias.\n')
         print(f'Diretório: {local_arquivo}\n\n')
         print('COMANDOS:')
         print('[1] Listar arquivos no diretório')
