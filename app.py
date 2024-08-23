@@ -2,16 +2,16 @@
 #  Projeto: PRJ001_CLEANING_FILES
 #  Versão:  v1.0
 #  Autor:   Guilherme Augusto
-#  Data:    2024-08-22
+#  Data:    2024-08-23
 # ==============================================================================
 
 """
 Este módulo "app" faz parte do projeto PRJ001_CLEANING_FILES.
-Ele foi criado em 2024-08-22 por Guilherme Augusto, e atualmente está na versão 1.0.
+Ele foi criado em 2024-08-23 por Guilherme Augusto, e atualmente está na versão 1.0.
 
 Histórico de Revisões:
 ------------------------------------------------------------------------------
-v1.0 - 2024-08-22 - Guilherme Augusto
+v1.0 - 2024-08-23 - Guilherme Augusto
     * Criação do arquivo inicial
     * Validação das funções principais do programa
     * Testes na prática
