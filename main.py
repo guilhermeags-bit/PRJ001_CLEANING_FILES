@@ -35,7 +35,7 @@ def iniciar_programa():
     print('==============================================================')
     print('VERSÃO: v1.0')
     print('AUTOR: Guilherme Augusto')
-    print('DATA DE CRIAÇÃO: 2024-08-22')
+    print('DATA DE CRIAÇÃO: 2024-08-23')
     print('--------------------------------------------------------------')
     print('DESCRIÇÃO:')
     print('Este programa realiza a limpeza de arquivos antigos de acordo')
