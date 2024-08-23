@@ -39,14 +39,15 @@ def iniciar_programa():
     print('--------------------------------------------------------------')
     print('DESCRIÇÃO:')
     print('Este programa realiza a limpeza de arquivos antigos de acordo')
-    print('com a data de modificação. Os arquivos e pastas com mais de 3')
-    print('meses serão removidos automaticamente.')
+    print('com a data de modificação.')
     print()
     print('Atenção: Não esqueça de configurar o arquivo "config"')
     print('com as configurações desejadas.')
-    print('==============================================================')
+    print('==============================================================\n')
 
     while main:
+        print(f'Data de exclusão: {data_modificacao}\n')
+        print(f'Diretório: {local_arquivo}\n\n')
         print('COMANDOS:')
         print('[1] Listar arquivos no diretório')
         print('[2] Apagar os arquivos')
