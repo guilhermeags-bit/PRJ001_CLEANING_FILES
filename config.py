@@ -24,7 +24,8 @@ v1.0 - 2024-08-22 - Guilherme Augusto
 # ==============================================================================
 
 # Selecione o diretorio onde se encontra a pasta OMBR
-local_arquivo: str = r'D:\Projetos\AMBIENTE_DEV_ARQUIVOS\OMBR'
+# Ex: C:\Users\USER\Desktop\AMBIENTE_DEV_ARQUIVOS\OMBR
+local_arquivo: str = r'C:\Users\USER\Desktop\AMBIENTE_DEV_ARQUIVOS\OMBR'
 
 # ------------------------------------------------------------------------------
 
