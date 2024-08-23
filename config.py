@@ -34,5 +34,3 @@ local_arquivo: str = r'C:\Users\USER\Desktop\AMBIENTE_DEV_ARQUIVOS\OMBR'
 data_modificacao = 20
 
 # ------------------------------------------------------------------------------
-
-

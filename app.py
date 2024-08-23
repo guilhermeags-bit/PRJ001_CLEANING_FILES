@@ -6,7 +6,7 @@
 # ==============================================================================
 
 """
-Este módulo "config" faz parte do projeto PRJ001_CLEANING_FILES.
+Este módulo "app" faz parte do projeto PRJ001_CLEANING_FILES.
 Ele foi criado em 2024-08-22 por Guilherme Augusto, e atualmente está na versão 1.0.
 
 Histórico de Revisões:
@@ -24,9 +24,9 @@ v1.0 - 2024-08-22 - Guilherme Augusto
 # ==============================================================================
 from config import local_arquivo, data_modificacao
 import os
-import time
 import shutil
 from datetime import datetime, timedelta
+
 
 # Função para listar arquivos e pastas modificados antes de uma data limite
 def funcao_listador_arquivos(local_arquivo, data_modificacao):
@@ -155,6 +155,7 @@ def funcao_filtrar_e_excluir(local_arquivo, data_modificacao):
         print(f'Erro: {e}')
         input('Operação abortada. \nAperte "enter" para continuar.')
         os.system('cls')
+
 
 # Ponto de entrada principal do script
 if __name__ == '__main__':

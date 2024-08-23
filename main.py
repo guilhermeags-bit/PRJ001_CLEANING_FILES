@@ -6,7 +6,7 @@
 # ==============================================================================
 
 """
-Este módulo "config" faz parte do projeto PRJ001_CLEANING_FILES.
+Este módulo "main" faz parte do projeto PRJ001_CLEANING_FILES.
 Ele foi criado em 2024-08-22 por Guilherme Augusto, e atualmente está na versão 1.0.
 
 Histórico de Revisões:
