@@ -28,54 +28,87 @@ import time
 import shutil
 from datetime import datetime, timedelta
 
-
-# Função para contar e exibir arquivos com exatamente 40 caracteres no nome
-def contar_letras_nome_arquivo(local_arquivo):
-    arquivos_com_40_caracteres = []  # Armazena arquivos com 40 caracteres no nome
-
-    for indice, pasta in enumerate(os.listdir(local_arquivo)):
-        caminho_arquivo = f'{local_arquivo}\\{pasta}\\int'
-        for root, dirs, files in os.walk(local_arquivo):
-            if root.endswith(caminho_arquivo):  # Verifica se a pasta atual é a "int"
-                for file_name in files:
-                    if len(file_name) == 40:  # Verifica se o nome do arquivo tem 40 caracteres
-                        arquivos_com_40_caracteres.append(file_name)
-                        print(file_name)
-
-    print("Arquivos totais: ", indice + 1)  # Exibe a quantidade total de arquivos encontrados
-
-
 # Função para listar arquivos e pastas modificados antes de uma data limite
 def funcao_listador_arquivos(local_arquivo, data_modificacao):
-    hoje = datetime.now()
-    data_limite = hoje - timedelta(days=data_modificacao)  # Define a data limite para verificação
+    try:
+        hoje = datetime.now()
+        data_limite = hoje - timedelta(days=data_modificacao)  # Define a data limite para verificação
 
-    arquivos_e_pastas_antigos = []
-    arquivos_com_40_caracteres = []
-    pastas_para_remover = []
+        arquivos_e_pastas_antigos = []
+        arquivos_com_40_caracteres = []
+        pastas_para_remover = []
 
-    # Percorre as pastas e arquivos no diretório especificado
-    for item in os.listdir(local_arquivo):
-        caminho_item = os.path.join(local_arquivo, item)
-        caminho_sub_pasta = os.path.join(caminho_item, 'int')
+        # Percorre as pastas e arquivos no diretório especificado
+        for item in os.listdir(local_arquivo):
+            caminho_item = os.path.join(local_arquivo, item)
+            caminho_sub_pasta = os.path.join(caminho_item, 'int')
 
-        if os.path.isdir(caminho_item):
-            for root, dirs, files in os.walk(caminho_sub_pasta, topdown=False):
-                for file_name in files:
-                    caminho_completo_arquivo = os.path.join(root, file_name)
-                    data_modificacao_item = datetime.fromtimestamp(os.path.getmtime(caminho_completo_arquivo))
-                    # Verifica se o arquivo é antigo e tem 40 caracteres no nome
-                    if data_modificacao_item < data_limite and len(file_name) == 40:
-                        arquivos_e_pastas_antigos.append(caminho_completo_arquivo)
-                        arquivos_com_40_caracteres.append(file_name)
-                        # Adiciona as pastas para remoção
-                        pasta_atual = os.path.dirname(caminho_completo_arquivo)
-                        if pasta_atual != local_arquivo:
-                            pasta_atual = os.path.dirname(pasta_atual)
-                            pastas_para_remover.append(pasta_atual)
-                    break
+            if os.path.isdir(caminho_item):
+                for root, dirs, files in os.walk(caminho_sub_pasta, topdown=False):
+                    for file_name in files:
+                        caminho_completo_arquivo = os.path.join(root, file_name)
+                        data_modificacao_item = datetime.fromtimestamp(os.path.getmtime(caminho_completo_arquivo))
+                        # Verifica se o arquivo é antigo e tem 40 caracteres no nome
+                        if data_modificacao_item < data_limite and len(file_name) == 40:
+                            arquivos_e_pastas_antigos.append(caminho_completo_arquivo)
+                            arquivos_com_40_caracteres.append(file_name)
+                            # Adiciona as pastas para remoção
+                            pasta_atual = os.path.dirname(caminho_completo_arquivo)
+                            if pasta_atual != local_arquivo:
+                                pasta_atual = os.path.dirname(pasta_atual)
+                                pastas_para_remover.append(pasta_atual)
+                        break
 
-    if len(arquivos_com_40_caracteres) > 0:
+        if len(arquivos_com_40_caracteres) > 0:
+            if arquivos_e_pastas_antigos:
+                # Exibe a lista de arquivos que atendem aos critérios
+                print('Listas de arquivos com o requisito de nome com 40 caracteres:\n')
+                for listagem_arquivos in arquivos_com_40_caracteres:
+                    print(listagem_arquivos)
+
+                print(f'\nArquivos modificados há mais de {data_modificacao} dias e com 40 caracteres: '
+                      f'{len(pastas_para_remover)} pastas.\n\n')
+                input('Aperte "enter" para continuar.')
+                os.system('cls')
+        else:
+            print('Não possui nenhum arquivo para listar!\n\n')
+            input('Aperte "enter" para continuar.')
+            os.system('cls')
+    except Exception as e:
+        print(f'Erro: {e}')
+
+
+# Função para filtrar e excluir arquivos e pastas com base em critérios específicos
+def funcao_filtrar_e_excluir(local_arquivo, data_modificacao):
+    try:
+        hoje = datetime.now()
+        data_limite = hoje - timedelta(days=data_modificacao)  # Define a data limite para verificação
+
+        arquivos_e_pastas_antigos = []
+        arquivos_com_40_caracteres = []
+        pastas_para_remover = []
+
+        # Percorre as pastas e arquivos no diretório especificado
+        for item in os.listdir(local_arquivo):
+            caminho_item = os.path.join(local_arquivo, item)
+            caminho_sub_pasta = os.path.join(caminho_item, 'int')
+
+            if os.path.isdir(caminho_item):
+                for root, dirs, files in os.walk(caminho_sub_pasta, topdown=False):
+                    for file_name in files:
+                        caminho_completo_arquivo = os.path.join(root, file_name)
+                        data_modificacao_item = datetime.fromtimestamp(os.path.getmtime(caminho_completo_arquivo))
+                        # Verifica se o arquivo é antigo e tem 40 caracteres no nome
+                        if data_modificacao_item < data_limite and len(file_name) == 40:
+                            arquivos_e_pastas_antigos.append(caminho_completo_arquivo)
+                            arquivos_com_40_caracteres.append(file_name)
+                            # Adiciona as pastas para remoção
+                            pasta_atual = os.path.dirname(caminho_completo_arquivo)
+                            if pasta_atual != local_arquivo:
+                                pasta_atual = os.path.dirname(pasta_atual)
+                                pastas_para_remover.append(pasta_atual)
+                        break
+
         if arquivos_e_pastas_antigos:
             # Exibe a lista de arquivos que atendem aos critérios
             print('Listas de arquivos com o requisito de nome com 40 caracteres:\n')
@@ -84,85 +117,40 @@ def funcao_listador_arquivos(local_arquivo, data_modificacao):
 
             print(f'\nArquivos modificados há mais de {data_modificacao} dias e com 40 caracteres: '
                   f'{len(pastas_para_remover)} pastas.\n\n')
-            input('Aperte "enter" para continuar.')
-            os.system('cls')
-    else:
-        print('Não possui nenhum arquivo para listar!\n\n')
-        input('Aperte "enter" para continuar.')
-        os.system('cls')
 
+            # Solicita confirmação do usuário antes de excluir as pastas
+            print('Deseja realmente apagar as respectivas pastas?')
+            opcao_usuario = input('COMANDO [Y]Sim [N]Não: ')
 
-# Função para filtrar e excluir arquivos e pastas com base em critérios específicos
-def funcao_filtrar_e_excluir(local_arquivo, data_modificacao):
-    hoje = datetime.now()
-    data_limite = hoje - timedelta(days=data_modificacao)  # Define a data limite para verificação
+            if opcao_usuario in ['Y', 'y']:
+                # Ordena as pastas para remover da mais interna para a mais externa
+                pastas_para_remover = sorted(pastas_para_remover, reverse=True)
+                for pasta in pastas_para_remover:
+                    try:
+                        shutil.rmtree(pasta)  # Remove a pasta e todo o seu conteúdo
+                        print(f'Pasta removida: {pasta}')
+                    except Exception as e:
+                        print(f'Erro ao remover {pasta}: {e}')
 
-    arquivos_e_pastas_antigos = []
-    arquivos_com_40_caracteres = []
-    pastas_para_remover = []
+                print("\nArquivos com exatamente 40 caracteres e modificados há mais de", data_modificacao,
+                      "dias foram excluídos.\n\n")
 
-    # Percorre as pastas e arquivos no diretório especificado
-    for item in os.listdir(local_arquivo):
-        caminho_item = os.path.join(local_arquivo, item)
-        caminho_sub_pasta = os.path.join(caminho_item, 'int')
+                print(f'Todos os arquivos e suas pastas foram deletados.\n')
+                input('Aperte "enter" para continuar.')
+                os.system('cls')
 
-        if os.path.isdir(caminho_item):
-            for root, dirs, files in os.walk(caminho_sub_pasta, topdown=False):
-                for file_name in files:
-                    caminho_completo_arquivo = os.path.join(root, file_name)
-                    data_modificacao_item = datetime.fromtimestamp(os.path.getmtime(caminho_completo_arquivo))
-                    # Verifica se o arquivo é antigo e tem 40 caracteres no nome
-                    if data_modificacao_item < data_limite and len(file_name) == 40:
-                        arquivos_e_pastas_antigos.append(caminho_completo_arquivo)
-                        arquivos_com_40_caracteres.append(file_name)
-                        # Adiciona as pastas para remoção
-                        pasta_atual = os.path.dirname(caminho_completo_arquivo)
-                        if pasta_atual != local_arquivo:
-                            pasta_atual = os.path.dirname(pasta_atual)
-                            pastas_para_remover.append(pasta_atual)
-                    break
-
-    if arquivos_e_pastas_antigos:
-        # Exibe a lista de arquivos que atendem aos critérios
-        print('Listas de arquivos com o requisito de nome com 40 caracteres:\n')
-        for listagem_arquivos in arquivos_com_40_caracteres:
-            print(listagem_arquivos)
-
-        print(f'\nArquivos modificados há mais de {data_modificacao} dias e com 40 caracteres: '
-              f'{len(pastas_para_remover)} pastas.\n\n')
-
-        # Solicita confirmação do usuário antes de excluir as pastas
-        print('Deseja realmente apagar as respectivas pastas?')
-        opcao_usuario = input('COMANDO [Y]Sim [N]Não: ')
-
-        if opcao_usuario in ['Y', 'y']:
-            # Ordena as pastas para remover da mais interna para a mais externa
-            pastas_para_remover = sorted(pastas_para_remover, reverse=True)
-            for pasta in pastas_para_remover:
-                try:
-                    shutil.rmtree(pasta)  # Remove a pasta e todo o seu conteúdo
-                    print(f'Pasta removida: {pasta}')
-                except Exception as e:
-                    print(f'Erro ao remover {pasta}: {e}')
-
-            print("\nArquivos com exatamente 40 caracteres e modificados há mais de", data_modificacao,
-                  "dias foram excluídos.\n\n")
-
-            print(f'Todos os arquivos e suas pastas foram deletados.\n')
-            input('Aperte "enter" para continuar.')
-            os.system('cls')
-
-        elif opcao_usuario in ['N', 'n']:
-            print('Operação abortada!\n\n')
-            input('Aperte "enter" para continuar.')
-            os.system('cls')
+            elif opcao_usuario in ['N', 'n']:
+                print('Operação abortada!\n\n')
+                input('Aperte "enter" para continuar.')
+                os.system('cls')
+            else:
+                print('Selecione uma opção válida!\n')
+                input('Operação abortada. Aperte "enter" para continuar.')
         else:
-            print('Selecione uma opção válida!\n')
-            input('Operação abortada. Aperte "enter" para continuar.')
-    else:
-        print('Não possui arquivos para listar e excluir.\n\n')
-        input('Operação abortada.\nAperte "enter" para continuar.')
-
+            print('Não possui arquivos para listar e excluir.\n\n')
+            input('Operação abortada.\nAperte "enter" para continuar.')
+    except Exception as e:
+        print(f'Erro: {e}')
 
 # Ponto de entrada principal do script
 if __name__ == '__main__':
