@@ -23,8 +23,13 @@ v1.0 - 2024-08-23 - Guilherme Augusto
 #  Início do código
 # ==============================================================================
 import os
-from config import local_arquivo, data_modificacao
+import configparser
 from app import funcao_listador_arquivos, funcao_filtrar_e_excluir
+
+cfg = configparser.ConfigParser()
+cfg.read('config.ini')
+local_arquivo = cfg.get('CONFIGURACOES', 'local_arquivo')
+data_modificacao = cfg.getint('CONFIGURACOES', 'data_modificacao')
 
 
 def iniciar_programa():
