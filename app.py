@@ -76,6 +76,8 @@ def funcao_listador_arquivos(local_arquivo, data_modificacao):
             os.system('cls')
     except Exception as e:
         print(f'Erro: {e}')
+        input('Operação abortada. \nAperte "enter" para continuar.')
+        os.system('cls')
 
 
 # Função para filtrar e excluir arquivos e pastas com base em critérios específicos
@@ -151,6 +153,8 @@ def funcao_filtrar_e_excluir(local_arquivo, data_modificacao):
             input('Operação abortada.\nAperte "enter" para continuar.')
     except Exception as e:
         print(f'Erro: {e}')
+        input('Operação abortada. \nAperte "enter" para continuar.')
+        os.system('cls')
 
 # Ponto de entrada principal do script
 if __name__ == '__main__':
